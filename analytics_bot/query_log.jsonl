@@ -1,0 +1,3 @@
+{"timestamp": "2026-04-23T21:34:49.884199", "question": "what is the most sold product?", "status": "failed", "error": "⚠️ Ranking query expected 1 rows but got 1.", "attempts": 3}
+{"timestamp": "2026-04-23T21:43:43.017670", "question": "what is the most sold 5 products?", "status": "success", "error": "", "attempts": 1}
+{"timestamp": "2026-04-23T22:00:10.740613", "question": "what is the most sold 5 products?", "status": "success", "error": "", "attempts": 1}
