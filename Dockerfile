@@ -5,15 +5,16 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Install system dependencies
+# Copy requirements FIRST (layer caching)
+COPY requirements.txt /app/
+
+# Install system dependencies, python packages, then clean up build tools in one layer
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc libpq-dev && \
+    pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apt-get purge -y --auto-remove gcc libpq-dev && \
     rm -rf /var/lib/apt/lists/*
-
-# Install python dependencies FIRST (layer caching)
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
 
 # Copy project AFTER dependencies (so code changes don't rebuild pip layer)
 COPY . /app/
