@@ -1,5 +1,5 @@
 # DEEB Analytics Bot
-
+--extra-index-url https://download.pytorch.org/whl/cpu
 gradio>=4.0.0
 langchain>=0.2.0
 langchain-core>=0.2.0
