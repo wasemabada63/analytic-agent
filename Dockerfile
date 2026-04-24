@@ -2,6 +2,9 @@ FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV OMP_NUM_THREADS=1
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
 
 WORKDIR /app
 
@@ -23,4 +26,4 @@ COPY . /app/
 RUN python manage.py collectstatic --noinput
 
 # Railway assigns PORT dynamically
-CMD gunicorn analytic_agent.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn analytic_agent.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120
